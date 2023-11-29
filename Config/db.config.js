@@ -27,3 +27,5 @@ export default db;
 
 // Kommentar: Ovenstående kode eksporterer databaseforbindelsen (db) som standard,
 // hvilket gør det muligt at importere og bruge den i andre dele af programmet.
+
+
