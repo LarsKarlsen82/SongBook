@@ -25,19 +25,40 @@ dotenv.config()
 
 // TESTE HENTE ARTISTER:
 
-import db from './Config/db.config.js'
+// import db from './Config/db.config.js'
 
-// Execute a database query to select titles from the 'song' table
-db.query(`SELECT * FROM artist`, (err, result) => {
+// // Execute a database query to select titles from the 'song' table
+// db.query(`SELECT * FROM artist`,  (err, result) => {
+//   if (err) {
+//     console.error('Error executing database query:', err);
+//   } else {
+//     console.log('Database Query Result:', result);
+//   }
+
+//   // Log the value of DB_PORT after the database query has completed
+//   console.log('DB_PORT:', process.env.DB_PORT);
+// });
+
+
+// Importér databaseforbindelsen
+import db from './Config/db.config.js';
+
+// Udfør en databaseforespørgsel for at vælge titler fra 'song'-tabellen sammen med alle kolonner fra 'artist'-tabellen
+db.query(`
+  SELECT song.title, artist.*
+  FROM song
+  JOIN artist ON song.artist_id = artist.id
+`, (err, result) => {
   if (err) {
-    console.error('Error executing database query:', err);
+    console.error('Fejl ved udførelse af databaseforespørgsel:', err);
   } else {
-    console.log('Database Query Result:', result);
+    console.log('Databaseforespørgsel Resultat:', result);
   }
 
-  // Log the value of DB_PORT after the database query has completed
+  // Log værdien af DB_PORT efter at databaseforespørgslen er fuldført
   console.log('DB_PORT:', process.env.DB_PORT);
 });
+
 
 
 const app = express()
