@@ -7,7 +7,7 @@ import ArtistRouter from './Controllers/artist.controller.js'
 dotenv.config()
 
 
-// TEST HENTE SONGS
+// TEST HENTE SONGS:
 
 // import db from './Config/db.config.js'
 
@@ -39,6 +39,7 @@ dotenv.config()
 //   console.log('DB_PORT:', process.env.DB_PORT);
 // });
 
+//TESTE ALLE INFO:
 
 // Importér databaseforbindelsen
 import db from './Config/db.config.js';
