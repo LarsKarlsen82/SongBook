@@ -4,111 +4,111 @@ import db from '../Config/db.config.js';
 
 const router = express.Router();
 
-// GET: List alle artister
+// GET: Liste alle artister
 router.get('/artists', (req, res) => {
-    // Fetch all artists from the 'artist' table
+    // Hent alle kunstnere fra 'artist'-tabellen
     const sql = 'SELECT * FROM artist';
 
     db.query(sql, (err, result) => {
         if (err) {
-            // Handle database query error
-            return res.status(500).json({ error: 'Internal Server Error' });
+            // Håndter fejl ved databaseforespørgsel
+            return res.status(500).json({ error: 'Intern Serverfejl' });
         }
 
-        // Return the list of artists as a JSON response
+        // Returner listen over artister som et JSON-svar
         return res.json(result);
     });
 });
 
-// GET: Artist detaljer
+// GET: artistdetaljer
 router.get('/artists/:id', (req, res) => {
-    // Extract artist ID from the request parameters
+    // Uddrag artist ID fra forespørgselsparametrene
     const artistId = req.params.id;
     
-    // Fetch artist details from the 'artist' table based on the artist ID
+    // Hent artistoplysninger fra 'artist'-tabellen baseret på kunstnerens ID
     const sql = 'SELECT * FROM artist WHERE id = ?';
 
     db.query(sql, [artistId], (err, result) => {
         if (err) {
-            // Handle database query error
-            return res.status(500).json({ error: 'Internal Server Error' });
+            // Håndter fejl ved databaseforespørgsel
+            return res.status(500).json({ error: 'Intern Serverfejl' });
         }
 
-        // Check if the artist was not found
+        // Kontroller, om artisten ikke blev fundet
         if (result.length === 0) {
-            return res.status(404).json({ error: 'Artist not found' });
+            return res.status(404).json({ error: 'Kunstner ikke fundet' });
         }
 
-        // Return artist details as a JSON response
+        // Returner artistdetaljer som et JSON-svar
         return res.json(result[0]);
     });
 });
 
 // POST: Opret artist
 router.post('/artists', (req, res) => {
-    // Extract name and genre from the request body
+    // Uddrag navn og genre fra forespørgselskroppen
     const { name, genre } = req.body;
     
-    // Insert a new artist into the 'artist' table
+    // Indsæt en ny artist i 'artist'-tabellen
     const sql = 'INSERT INTO artist (name, genre) VALUES (?, ?)';
 
     db.query(sql, [name, genre], (err, result) => {
         if (err) {
-            // Handle database query error
-            return res.status(500).json({ error: 'Internal Server Error' });
+            // Håndter fejl ved databaseforespørgsel
+            return res.status(500).json({ error: 'Intern Serverfejl' });
         }
 
-        // Return a success message and the ID of the newly created artist
-        return res.json({ message: 'Artist created successfully', artistId: result.insertId });
+        // Returner en succesbesked og ID'et for den nyoprettede artist
+        return res.json({ message: 'Kunstner oprettet succesfuldt', artistId: result.insertId });
     });
 });
 
 // PUT: Opdater artist
 router.put('/artists/:id', (req, res) => {
-    // Extract artist ID, name, and genre from the request parameters and body
+    // Uddrag artistens ID, navn og genre fra request parameters og body
     const artistId = req.params.id;
     const { name, genre } = req.body;
     
-    // Update artist information in the 'artist' table based on the artist ID
+    // Opdater artistoplysninger i 'artist'-tabellen baseret på artistens ID
     const sql = 'UPDATE artist SET name = ?, genre = ? WHERE id = ?';
 
     db.query(sql, [name, genre, artistId], (err, result) => {
         if (err) {
-            // Handle database query error
-            return res.status(500).json({ error: 'Internal Server Error' });
+            // Håndter fejl ved databaseforespørgsel
+            return res.status(500).json({ error: 'Intern Serverfejl' });
         }
 
-        // Check if the artist was not found
+        // Kontroller, om artisten ikke blev fundet
         if (result.affectedRows === 0) {
-            return res.status(404).json({ error: 'Artist not found' });
+            return res.status(404).json({ error: 'Kunstner ikke fundet' });
         }
 
-        // Return a success message
-        return res.json({ message: 'Artist updated successfully' });
+        // Returner en succesbesked
+        return res.json({ message: 'Kunstner opdateret succesfuldt' });
     });
 });
 
 // DELETE: Slet artist
 router.delete('/artists/:id', (req, res) => {
-    // Extract artist ID from the request parameters
+    // Uddrag artistens ID fra request parameters
     const artistId = req.params.id;
     
-    // Delete an artist from the 'artist' table based on the artist ID
+    // Slet en artist fra 'artist'-tabellen baseret på artistens ID
     const sql = 'DELETE FROM artist WHERE id = ?';
 
     db.query(sql, [artistId], (err, result) => {
         if (err) {
-            // Handle database query error
-            return res.status(500).json({ error: 'Internal Server Error' });
+            // Håndter fejl ved databaseforespørgsel
+            return res.status(500).json({ error: 'Intern Serverfejl' });
         }
 
-        // Check if the artist was not found
+        // Kontroller, om artisten ikke blev fundet
         if (result.affectedRows === 0) {
-            return res.status(404).json({ error: 'Artist not found' });
+            return res.status(404).json({ error: 'Kunstner ikke fundet' });
         }
 
-        // Return a success message
-        return res.json({ message: 'Artist deleted successfully' });
+        // Returner en succesbesked
+        return res.json({ message: 'Kunstner slettet succesfuldt' });
     });
 });
 
