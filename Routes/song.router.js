@@ -8,12 +8,35 @@ const controller = new SongController()
 
 // List alle sange
 router.get('/songs', (req,res) => {
-	controller.list(req,res)
-})
+	controller.list(req,res);
+});
+
 
 // Hent sang detaljer
 router.get('/songs/:id([0-9]*)', (req,res) => {
-	controller.details(req,res)
+	controller.details(req,res);
+});
+
+  
+router.get('/', (req, res) => {
+res.send('Hello, this is the root path! ØJ ØJ, STILL LEARNING');
+});
+
+
+// Opretter ny sang
+router.post('/songs', (req, res) => {
+	controller.create(req,res)
 })
 
-export { router as SongRouter } 
+// Opdaterer sang
+router.put('/songs', (req, res) => {
+	controller.update(req,res)
+})
+
+// Sletter sang
+router.delete('/songs', (req, res) => {
+	controller.delete(req,res)
+})
+
+
+export { router as SongRouter };
