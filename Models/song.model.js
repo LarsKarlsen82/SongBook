@@ -25,7 +25,9 @@ SongModel.init({
     }
 }, {
     sequelize,
-    modelName: 'song'
+    modelName: 'song',
+    freezeTableName: true,
+    underscored:true
 })
 
 export default SongModel;

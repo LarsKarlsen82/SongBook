@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import { SongRouter } from './Routes/song.router.js'
+import { router as InitRouter } from './Routes/init.sequelize.router.js';
 import ArtistRouter from './Controllers/artist.controller.js'
 
 
@@ -94,6 +95,7 @@ app.use(express.urlencoded({
 
 app.use(express.json());
 
+app.use(InitRouter);
 app.use(SongRouter);
 
 app.use(ArtistRouter);

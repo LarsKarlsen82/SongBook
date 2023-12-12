@@ -21,7 +21,9 @@ ArtistModel.init({
     }
 }, {
     sequelize,
-    modelName: 'artist'
+    modelName: 'artist',
+    freezeTableName: true,
+    underscored:true
 });
 
 export default ArtistModel;
