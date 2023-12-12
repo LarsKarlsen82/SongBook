@@ -88,6 +88,9 @@ db.query(`SELECT name FROM artist WHERE name = ?`, [specificName], (err, result)
 
 const app = express();
 
+app.use(express.urlencoded({
+  extended: true
+}))
 
 app.use(express.json());
 
